@@ -1,25 +1,78 @@
-<!DOCTYPE html>
-<htmL>
-<head>
-    <title> Laravel CRUD </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-</head>
-<body>
+@extends('crud.master')
 
-<div class="container-fluid">
-    <header class="text-center p-4 bg-violet-500">
-        <h1>User Management</h1>
-    </header>
-</div>
+@section('title')
+    User Management
+@endsection
+@section('content')
+    <div class="container">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="controller row">
+                    <div class="col-md-6 mb-4">
+                        <button class="btn btn-success">Add New User</button>
+                    </div>
+                    <div class="col-md-6 ">
+                        <input type="text" class="form-control w-50 ms-auto" id="myInput" onkeyup="tableFilter()" placeholder="Search for names.." title="Type in a name">
+                    </div>
 
+                </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+                <table class="table table-light table-hover">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>About</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
 
+                    @foreach($users as $user)
+                    <tr>
+                        <td>{{++$i}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->phone}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->about}}</td>
+                        <td>{{$user->image}}</td>
+                        <td>
+                            <form action="{{ route('products.destroy',$user->id) }}" method="POST">
+                                <a class="btn btn-warning" href="{{ route('products.edit',$user->id) }}">Edit</a>
 
-</body>
-</htmL>
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    function tableFilter() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>
+@endsection

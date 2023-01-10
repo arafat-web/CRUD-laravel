@@ -9,7 +9,9 @@
             <div class="card-body">
                 <div class="controller row">
                     <div class="col-md-6 mb-4">
-                        <button class="btn btn-success">Add New User</button>
+                        <a href="{{route('create')}}" class="btn btn-success">
+                            Add New User
+                        </a>
                     </div>
                     <div class="col-md-6 ">
                         <input type="text" class="form-control w-50 ms-auto" id="myInput" onkeyup="tableFilter()" placeholder="Search for names.." title="Type in a name">

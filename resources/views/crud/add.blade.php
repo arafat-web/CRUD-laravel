@@ -5,10 +5,21 @@
 @endsection
 @section('content')
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="body border-0 shadow-sm p-4">
             <div class="card-body m-auto" style="width: 500px;">
                 <h4 class="text-black mb-3 pb-2 border-bottom text-center">Enter Information</h4>
                 <form action="{{route('store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name">

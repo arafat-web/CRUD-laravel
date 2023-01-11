@@ -6,7 +6,7 @@
 @section('content')
     <div class="container">
         @if ($message = Session::get('success'))
-            <div class="alert alert-sucess alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{$message}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -16,7 +16,7 @@
                 <div class="controller row">
                     <div class="col-md-6 mb-4">
                         <a href="{{route('student.create')}}" class="btn btn-success">
-                            Add New User
+                            <i class="fas fa-plus"></i> Add New User
                         </a>
                     </div>
                     <div class="col-md-6 ">
@@ -33,7 +33,7 @@
                         <th>Email</th>
                         <th>About</th>
                         <th>Image</th>
-                        <th>Action</th>
+                        <th class="text-end">Action</th>
                     </tr>
                     @foreach($students as $student)
                         <tr>
@@ -45,12 +45,13 @@
                             <td>
                                 <img src="{{asset($student->image)}}" width="50px" height="50px">
                             </td>
-                            <td>
-                                <form action="{{ route('destroy',$student->id) }}" method="POST">
-                                    <a class="btn btn-warning" href="{{ route('edit', $student->id) }}">Edit</a>
+                            <td class="text-end">
+                                <form action="{{ route('student.destroy',$student->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{ route('student.show',$student->id) }}"><i class="fas fa-eye"></i></a>
+                                    <a class="btn btn-warning" href="{{ route('student.edit', $student->id) }}"><i class="fas fa-edit"></i></a>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

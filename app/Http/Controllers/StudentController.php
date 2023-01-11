@@ -27,7 +27,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -38,7 +38,29 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'about' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        // Storing the image
+        $path = $request->file('image');
+        $image = rand() . '.' . $path->getClientOriginalExtension();
+        $path->move(public_path('images/'), $image);
+
+        Student::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'about' => $request->about,
+            'image' => 'images/' . $image,
+        ]);
+
+        return redirect()->route('student.index')
+            ->with('success','Student added successfully.');
     }
 
     /**
@@ -60,7 +82,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('student.edit',compact('student'));
     }
 
     /**
@@ -83,6 +105,9 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+
+        return redirect()->route('student.index')
+            ->with('success','Student deleted successfully');
     }
 }

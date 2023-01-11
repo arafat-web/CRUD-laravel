@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +13,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::resource('/', UserController::class);
+Route::get('/', function () {
+    return view('welcome');
+});

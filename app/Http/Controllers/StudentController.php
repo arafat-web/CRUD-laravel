@@ -116,14 +116,6 @@ class StudentController extends Controller
             $image = $student->image;
         }
 
-
-//        if(isset($request->file('image'))){
-//            $path = $request->file('image');
-//            $image = rand() . '.' . $path->getClientOriginalExtension();
-//            $path->move(public_path('images/'), $image);
-//        }
-
-
         $student->update([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -133,7 +125,7 @@ class StudentController extends Controller
         ]);
 
         return redirect()->route('student.index')
-            ->with('success', 'Student added successfully.');
+            ->with('success', 'Student Updated successfully.');
     }
 
     /**
@@ -147,6 +139,6 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('student.index')
-            ->with('success', 'Student deleted successfully');
+            ->with('success', 'Student Deleted successfully');
     }
 }

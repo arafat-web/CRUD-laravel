@@ -8,7 +8,7 @@
           integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body>
+<body class="bg-light">
 <main>
     <header class="text-center p-4 bg-info text-white">
         <h1>Student Management</h1>

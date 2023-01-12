@@ -11,7 +11,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm m-4">
             <div class="card-body">
                 <div class="controller row">
                     <div class="col-md-6 mb-4">
@@ -41,7 +41,7 @@
                             <td>{{$student->name}}</td>
                             <td>{{$student->phone}}</td>
                             <td>{{$student->email}}</td>
-                            <td>{{$student->about}}</td>
+                            <td>{{Str::limit($student->about, 20)}}</td>
                             <td>
                                 <img src="{{asset($student->image)}}" width="50px" height="50px">
                             </td>

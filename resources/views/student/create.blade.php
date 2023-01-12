@@ -16,7 +16,7 @@
             </div>
         @endif
 
-            <div class="body border-0 shadow-sm p-4">
+            <div class="body border-0 shadow-sm p-4 m-4 bg-white">
                 <div class="card-body m-auto" style="width: 500px;">
                     <h4 class="text-black mb-3 pb-2 border-bottom text-center">Enter Information</h4>
                     <form action="{{route('student.store')}}" method="post" enctype="multipart/form-data">

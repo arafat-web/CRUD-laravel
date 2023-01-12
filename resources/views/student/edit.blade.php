@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-    Add New User
+    Update User
 @endsection
 @section('content')
     <div class="container">
@@ -15,9 +15,9 @@
                 </ul>
             </div>
         @endif
-            <div class="body border-0 shadow-sm p-4">
+            <div class="card border-0 shadow-sm p-4 m-4 ">
                 <div class="card-body m-auto" style="width: 500px;">
-                    <h4 class="text-black mb-3 pb-2 border-bottom text-center">Enter Information</h4>
+                    <h4 class="text-black mb-3 pb-2 border-bottom text-center">Update Information</h4>
                     <form action="{{route('student.update', $student->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -41,6 +41,7 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-control" id="image" name="image">
+                            <img src="{{asset($student->image)}}" class="d-block mt-3" width="200px">
                             <input type="hidden" value="{{$student->image}}" name="imageValue">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
